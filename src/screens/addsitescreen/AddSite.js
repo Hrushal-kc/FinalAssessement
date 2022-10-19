@@ -1,5 +1,6 @@
 import React from 'react';
 import {SafeAreaView, View, StyleSheet, Text, Pressable} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import UserSite from '../../components/UserSite';
 
@@ -7,6 +8,10 @@ const AddSite = ({navigation}) => {
   const handlePassManagerScreen = () => {
     navigation.navigate('PassManager');
   };
+
+  const dispatch = useDispatch();
+
+  const itemList = useSelector(state => state.slice.value);
 
   return (
     <SafeAreaView style={styles.container}>
