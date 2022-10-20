@@ -1,7 +1,7 @@
 import React from 'react';
 
 import AuthTabNavigation from './src/navigation/AuthTabNaviagtion';
-
+import RNBootSplash from 'react-native-bootsplash';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PassManager from './src/screens/passmanagerscreen/PassManager';
 import AddSite from './src/screens/addsitescreen/AddSite';
@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer theme={MyTheme}>
+      <NavigationContainer theme={MyTheme} onReady={() => RNBootSplash.hide()}>
         <Stack.Navigator initialRouteName="AuthTabNavigation">
           <Stack.Screen
             name="AuthTabNavigation"
