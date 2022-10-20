@@ -1,9 +1,19 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const ItemList = ({logo, mainText, copyPassword, url, onPress}) => {
+const ItemList = ({
+  logo,
+  mainText,
+  copyPassword,
+  url,
+  onLongPress,
+  onPress,
+}) => {
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.container}
+      onLongPress={onLongPress}
+      onPress={onPress}>
       <View style={styles.logoContainer}>
         <Image source={logo} style={styles.logo} />
         <View style={styles.textContainer}>
@@ -14,7 +24,7 @@ const ItemList = ({logo, mainText, copyPassword, url, onPress}) => {
       <View style={styles.urlcontainer}>
         <Text style={styles.urlText}>{url}</Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

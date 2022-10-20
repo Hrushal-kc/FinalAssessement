@@ -1,11 +1,15 @@
 import React from 'react';
 import {TextInput, StyleSheet, View, Text} from 'react-native';
 
-const FormInput = ({text, boxheight}) => {
+const FormInput = ({text, boxheight, value, editable}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{text}</Text>
-      <TextInput style={[styles.inputtext, {height: boxheight}]} />
+      <TextInput
+        style={[styles.inputtext, {height: boxheight}]}
+        value={value}
+        editable={editable}
+      />
     </View>
   );
 };

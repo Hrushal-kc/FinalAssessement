@@ -8,6 +8,8 @@ import AddSite from './src/screens/addsitescreen/AddSite';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
+import SelectSite from './src/screens/selectsitescreen/SelectSite';
+import EditSite from './src/screens/editsitescreen/EditSite';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,9 +41,20 @@ const App = () => {
             component={AddSite}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="SelectSite"
+            component={SelectSite}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="EditSite"
+            component={EditSite}
+            options={{headerShown: false}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
+    // <SelectSite />
   );
 };
 

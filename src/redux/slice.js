@@ -56,10 +56,11 @@ export const slice = createSlice({
     },
 
     updateSite: (state, action) => {
-      state.value.map(task => {
-        if (task.id === action.payload.id) {
-          task.task = action.payload.task;
+      state.value = state.value.map(passwordDetails => {
+        if (passwordDetails.id === action.payload.id) {
+          passwordDetails = action.payload;
         }
+        return passwordDetails;
       });
     },
 

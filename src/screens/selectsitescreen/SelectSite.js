@@ -1,12 +1,30 @@
 import React from 'react';
-import {SafeAreaView, View, StyleSheet, Text, Pressable} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, Pressable} from 'react-native';
 
 import UserSite from '../../components/UserSite';
 
-const SelectSite = () => {
+const SelectSite = ({navigation, route}) => {
+  const handlePassManagerScreen = () => {
+    navigation.navigate('PassManager');
+  };
+
+  dataValue = route.params.item;
+
+  const handleEditPress = dataValue => {
+    navigation.navigate('EditSite', {dataValue});
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <UserSite headertext="Site Details" edittext="Edit" />
+      <UserSite
+        headertext="Site Details"
+        edittext="Edit"
+        logoName="keyboard-backspace"
+        onPress={handlePassManagerScreen}
+        details={dataValue}
+        onEditPress={() => handleEditPress(dataValue)}
+        editable={false}
+      />
     </SafeAreaView>
   );
 };

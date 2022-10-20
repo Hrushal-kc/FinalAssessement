@@ -7,7 +7,6 @@ import * as yup from 'yup';
 
 const SigninScreen = ({navigation}) => {
   const handlePassManagerScreen = values => {
-    console.log(values);
     navigation.navigate('PassManager');
   };
 

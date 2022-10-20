@@ -12,7 +12,16 @@ import FormInput from './FormInput';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const UserSite = ({headertext, edittext, logoName, onPress}) => {
+const UserSite = ({
+  headertext,
+  edittext,
+  logoName,
+  onPress,
+  onEditPress,
+  details,
+  editable,
+}) => {
+  console.log(details);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.navBar}>
@@ -22,17 +31,47 @@ const UserSite = ({headertext, edittext, logoName, onPress}) => {
           size={30}
           onPress={onPress}></Icon.Button>
         <Text style={styles.headertext}>{headertext}</Text>
-        <Pressable>
+        <Pressable onPress={onEditPress}>
           <Text style={styles.edittext}>{edittext}</Text>
         </Pressable>
       </View>
       <View style={styles.inputContainer}>
-        <FormInput text="URL" boxheight={41} />
-        <FormInput text="Site Name" boxheight={41} />
-        <FormInput text="Sector/Folder" boxheight={41} />
-        <FormInput text="User Name" boxheight={41} />
-        <FormInput text="Site Password" boxheight={41} />
-        <FormInput text="Notes" boxheight={61} />
+        <FormInput
+          text="URL"
+          boxheight={41}
+          value={details.URL}
+          editable={editable}
+        />
+        <FormInput
+          text="Site Name"
+          boxheight={41}
+          value={details.SiteName}
+          editable={editable}
+        />
+        <FormInput
+          text="Sector/Folder"
+          boxheight={41}
+          value={details.Sector}
+          editable={editable}
+        />
+        <FormInput
+          text="User Name"
+          boxheight={41}
+          value={details.UserName}
+          editable={editable}
+        />
+        <FormInput
+          text="Site Password"
+          boxheight={41}
+          value={details.SitePassword}
+          editable={editable}
+        />
+        <FormInput
+          text="Notes"
+          boxheight={61}
+          value={details.Notes}
+          editable={editable}
+        />
       </View>
     </SafeAreaView>
   );

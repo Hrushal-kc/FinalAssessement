@@ -41,6 +41,10 @@ const PassManager = ({navigation}) => {
     ]);
   };
 
+  const handleSelectSiteNavigation = item => {
+    navigation.navigate('SelectSite', item);
+  };
+
   const renderItems = ({item}) => {
     return (
       <ItemList
@@ -48,7 +52,8 @@ const PassManager = ({navigation}) => {
         mainText={item.SiteName}
         copyPassword={item.SitePassword}
         logo={item.image}
-        onPress={() => handleTaskDelete(item)}
+        onLongPress={() => handleTaskDelete(item)}
+        onPress={() => handleSelectSiteNavigation({item})}
       />
     );
   };
