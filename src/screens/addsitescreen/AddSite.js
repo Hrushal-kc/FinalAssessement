@@ -87,7 +87,7 @@ const AddSite = ({navigation}) => {
                 <Text style={styles.text}>URL</Text>
                 <TextInput
                   name="URL"
-                  style={styles.textInput}
+                  style={[styles.textInput, {height: 41}]}
                   onChangeText={handleChange('URL')}
                   onBlur={handleBlur('URL')}
                   value={values.URL}
@@ -98,7 +98,7 @@ const AddSite = ({navigation}) => {
                 <Text style={styles.text}>SiteName</Text>
                 <TextInput
                   name="SiteName"
-                  style={styles.textInput}
+                  style={[styles.textInput, {height: 41}]}
                   onChangeText={handleChange('SiteName')}
                   onBlur={handleBlur('SiteName')}
                   value={values.SiteName}
@@ -106,7 +106,7 @@ const AddSite = ({navigation}) => {
                 <Text style={styles.text}>Sector/Folder</Text>
                 <TextInput
                   name="Sector"
-                  style={styles.textInput}
+                  style={[styles.textInput, {height: 41}]}
                   onChangeText={handleChange('Sector')}
                   onBlur={handleBlur('Sector')}
                   value={values.Sector}
@@ -114,13 +114,13 @@ const AddSite = ({navigation}) => {
                 <Text style={styles.text}>UserName</Text>
                 <TextInput
                   name="UserName"
-                  style={styles.textInput}
+                  style={[styles.textInput, {height: 41}]}
                   onChangeText={handleChange('UserName')}
                   onBlur={handleBlur('UserName')}
                   value={values.UserName}
                 />
                 <Text style={styles.text}>SitePassword</Text>
-                <View style={styles.textInput}>
+                <View style={[styles.textInput, {height: 41}]}>
                   <TextInput
                     name="SitePassword"
                     style={styles.mpinContainer}
