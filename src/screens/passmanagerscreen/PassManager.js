@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   FlatList,
+  Alert,
 } from 'react-native';
 import drawerlogo from '../../../assests/burger_menu.png';
 import textpic from '../../../assests/passtext.png';
@@ -15,26 +16,39 @@ import profilelogo from '../../../assests/profile.png';
 import pathLogo from '../../../assests/PathCopy.png';
 import ItemList from '../../components/ItemList';
 import AddButton from '../../components/AddButton';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {deleteSite} from '../../redux/slice';
 
 const PassManager = ({navigation}) => {
   const taskList = useSelector(state => state.slice.value);
+  const dispatch = useDispatch();
 
   const handleSiteNavigation = () => {
     navigation.navigate('AddSite');
   };
 
+  const handleTaskDelete = item => {
+    Alert.alert('Confirm', 'Do you want to delete Site', [
+      {
+        text: 'ok',
+        onPress: () => {
+          dispatch(deleteSite({id: item.id}));
+        },
+      },
+      {
+        text: 'cancel',
+      },
+    ]);
+  };
+
   const renderItems = ({item}) => {
-    console.log(item.id);
-    console.log(item);
-    console.log(item.image);
     return (
       <ItemList
         url={item.URL}
         mainText={item.SiteName}
         copyPassword={item.SitePassword}
         logo={item.image}
-        onPress={() => alert('button is pressed')}
+        onPress={() => handleTaskDelete(item)}
       />
     );
   };
