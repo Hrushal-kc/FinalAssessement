@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Toast from 'react-native-simple-toast';
 
 const ItemList = ({
   logo,
@@ -11,11 +12,9 @@ const ItemList = ({
   onLongPress,
   onPress,
 }) => {
-  const [copiedText, setCopiedText] = useState('');
-
   const copyToClipboard = password => {
     Clipboard.setString(password);
-    alert(password);
+    Toast.show('Copy to Clipboard');
   };
 
   return (
