@@ -1,11 +1,9 @@
 import React from 'react';
 import {View, Image, Text, StyleSheet, Pressable} from 'react-native';
 
-const ItemList = ({logo, mainText, copyPassword, url}) => {
+const ItemList = ({logo, mainText, copyPassword, url, onPress}) => {
   return (
-    <Pressable
-      style={styles.container}
-      onPress={() => alert('button is pressed')}>
+    <Pressable style={styles.container} onPress={onPress}>
       <View style={styles.logoContainer}>
         <Image source={logo} style={styles.logo} />
         <View style={styles.textContainer}>

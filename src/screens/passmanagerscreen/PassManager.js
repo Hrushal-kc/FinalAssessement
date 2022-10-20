@@ -5,7 +5,6 @@ import {
   Image,
   StyleSheet,
   Text,
-  ScrollView,
   FlatList,
 } from 'react-native';
 import drawerlogo from '../../../assests/burger_menu.png';
@@ -16,9 +15,11 @@ import profilelogo from '../../../assests/profile.png';
 import pathLogo from '../../../assests/PathCopy.png';
 import ItemList from '../../components/ItemList';
 import AddButton from '../../components/AddButton';
-import {DATA} from '../../data/data';
+import {useSelector} from 'react-redux';
 
 const PassManager = ({navigation}) => {
+  const taskList = useSelector(state => state.slice.value);
+
   const handleSiteNavigation = () => {
     navigation.navigate('AddSite');
   };
@@ -33,6 +34,7 @@ const PassManager = ({navigation}) => {
         mainText={item.SiteName}
         copyPassword={item.SitePassword}
         logo={item.image}
+        onPress={() => alert('button is pressed')}
       />
     );
   };
@@ -60,10 +62,9 @@ const PassManager = ({navigation}) => {
             </View>
             <Image source={pathLogo} />
           </View>
-
           <FlatList
             style={styles.flatList}
-            data={DATA}
+            data={taskList}
             renderItem={renderItems}
             keyExtractor={item => item.id}></FlatList>
         </View>
