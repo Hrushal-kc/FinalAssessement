@@ -76,7 +76,10 @@ const PassManager = ({navigation}) => {
         </View>
         <View style={styles.pageContainer}>
           <View style={styles.headerContainer}>
-            <Text style={styles.siteText}>Sites</Text>
+            <View>
+              <Text style={styles.siteText}>Sites</Text>
+              <View style={styles.bottomLine} />
+            </View>
             <Text style={styles.socialText}>Social Media</Text>
             <View style={styles.badge}>
               <Text style={styles.badgeText}>07</Text>
@@ -150,7 +153,15 @@ const styles = StyleSheet.create({
     lineHeight: 33,
     marginLeft: 20,
     marginRight: 130,
-    textDecorationLine: 'underline',
+  },
+
+  bottomLine: {
+    borderBottomColor: '#FFA136',
+    borderBottomWidth: 3,
+    width: 30,
+    height: 3.2,
+    borderRadius: 1.6,
+    marginLeft: 20,
   },
 
   socialText: {
