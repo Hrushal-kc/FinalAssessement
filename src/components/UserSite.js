@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import FormInput from './FormInput';
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const UserSite = ({
@@ -21,7 +20,6 @@ const UserSite = ({
   details,
   editable,
 }) => {
-  console.log(details);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.navBar}>

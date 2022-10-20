@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -8,6 +8,7 @@ import {
   FlatList,
   Alert,
   StatusBar,
+  Pressable,
 } from 'react-native';
 import drawerlogo from '../../../assests/burger_menu.png';
 import textpic from '../../../assests/passtext.png';
@@ -19,10 +20,16 @@ import ItemList from '../../components/ItemList';
 import AddButton from '../../components/AddButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteSite} from '../../redux/slice';
+import SearchBar1 from '../../components/SearchBar';
 
 const PassManager = ({navigation}) => {
+  const [showSearchBar, setShowSeacrhBar] = useState(false);
   const taskList = useSelector(state => state.slice.value);
   const dispatch = useDispatch();
+
+  const handleShowSearchBar = () => {
+    setShowSeacrhBar(!showSearchBar);
+  };
 
   const handleSiteNavigation = () => {
     navigation.navigate('AddSite');
@@ -69,12 +76,16 @@ const PassManager = ({navigation}) => {
           </View>
           <View style={styles.logoContainer}>
             <Image source={textpic} style={styles.logoimage} />
-            <Image source={searchlogo} style={styles.logoimage} />
+            <Pressable onPress={handleShowSearchBar}>
+              <Image source={searchlogo} style={styles.logoimage} />
+            </Pressable>
             <Image source={synclogo} style={styles.logoimage} />
             <Image source={profilelogo} style={styles.logoimage} />
           </View>
         </View>
         <View style={styles.pageContainer}>
+          {showSearchBar && <SearchBar1 />}
+
           <View style={styles.headerContainer}>
             <View>
               <Text style={styles.siteText}>Sites</Text>
@@ -105,6 +116,7 @@ const styles = StyleSheet.create({
 
   container: {
     flexDirection: 'column',
+    backgroundColor: '#FAFAFA',
   },
 
   navBar: {
@@ -135,7 +147,8 @@ const styles = StyleSheet.create({
 
   pageContainer: {
     flexDirection: 'column',
-    margin: 10,
+    marginLeft: 20,
+    marginRight: 20,
   },
 
   headerContainer: {
@@ -189,8 +202,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     lineHeight: 27,
   },
-
-  flatList: {},
 });
 
 export default PassManager;

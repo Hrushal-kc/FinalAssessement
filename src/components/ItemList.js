@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const ItemList = ({
   logo,
@@ -17,11 +18,6 @@ const ItemList = ({
     alert(password);
   };
 
-  const fetchCopiedText = async () => {
-    const text = await Clipboard.getString();
-    setCopiedText(text);
-  };
-
   return (
     <TouchableOpacity
       style={styles.container}
@@ -32,7 +28,10 @@ const ItemList = ({
         <View style={styles.textContainer}>
           <Text style={styles.maintext}>{mainText}</Text>
           <TouchableOpacity onPress={() => copyToClipboard(copyPassword)}>
-            <Text style={styles.copyText}>Copy Password</Text>
+            <View style={styles.copyContainer}>
+              <Icon name="content-copy" style={styles.copyIcon} />
+              <Text style={styles.copyText}>Copy Password</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -104,5 +103,14 @@ const styles = StyleSheet.create({
   urlcontainer: {
     backgroundColor: '#FAFAFA',
     padding: 10,
+  },
+
+  copyContainer: {
+    flexDirection: 'row',
+  },
+
+  copyIcon: {
+    color: '#0E85FF',
+    margin: 2,
   },
 });

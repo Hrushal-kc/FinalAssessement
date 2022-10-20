@@ -25,7 +25,6 @@ const SignUp = ({navigation}) => {
   });
 
   const handlePassManagerScreen = values => {
-    console.log(values);
     navigation.navigate('PassManager');
   };
 

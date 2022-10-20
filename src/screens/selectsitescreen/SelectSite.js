@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, Pressable} from 'react-native';
-import Icon1 from 'react-native-vector-icons/Entypo';
 
 import UserSite from '../../components/UserSite';
 
 const SelectSite = ({navigation, route}) => {
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [icon, setIcon] = useState('eye');
   const handlePassManagerScreen = () => {
     navigation.navigate('PassManager');
   };
