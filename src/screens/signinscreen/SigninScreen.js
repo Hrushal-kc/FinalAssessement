@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Text, Image, TextInput} from 'react-native';
 import Button from '../../components/Button';
 import fingerPrintIcon from '../../../assests/fingerprinticon.png';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import Toast from 'react-native-simple-toast';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const SigninScreen = ({navigation}) => {
-  const handlePassManagerScreen = values => {
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [icon, setIcon] = useState('eye');
+
+  const handlePassManagerScreen = () => {
+    Toast.show('Congrtats!!! Success \n Signin to access the vault');
     navigation.navigate('PassManager');
   };
 
@@ -50,16 +56,28 @@ const SigninScreen = ({navigation}) => {
               {errors.MobileNumber && (
                 <Text style={styles.errorText}>{errors.MobileNumber}</Text>
               )}
-              <TextInput
-                name="mPin"
-                placeholder="mPin"
-                style={styles.textinput}
-                onChangeText={handleChange('mPin')}
-                onBlur={handleBlur('mPin')}
-                value={values.mPin}
-                keyboardType="decimal-pad"
-                secureTextEntry
-              />
+              <View style={styles.textinput}>
+                <TextInput
+                  name="mPin"
+                  placeholder="mPin"
+                  style={styles.mpinContainer}
+                  onChangeText={handleChange('mPin')}
+                  onBlur={handleBlur('mPin')}
+                  value={values.mPin}
+                  keyboardType="decimal-pad"
+                  secureTextEntry={secureTextEntry}
+                />
+                <Icon
+                  style={styles.eyeicon}
+                  name={icon}
+                  size={25}
+                  onPress={() => {
+                    setSecureTextEntry(!secureTextEntry);
+
+                    secureTextEntry ? setIcon('eye-with-line') : setIcon('eye');
+                  }}
+                />
+              </View>
               {errors.mPin && (
                 <Text style={styles.errorText}>{errors.mPin}</Text>
               )}
@@ -138,6 +156,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '100%',
     marginBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 
   errorText: {
@@ -145,6 +165,21 @@ const styles = StyleSheet.create({
     color: '#ff0033',
     alignSelf: 'center',
     bottom: 10,
+  },
+
+  mpinContainer: {
+    borderRadius: 4,
+    backgroundColor: '#FFFFFF',
+    padding: 0,
+    height: 50,
+    alignSelf: 'center',
+    width: '60%',
+  },
+  eyeicon: {
+    height: 24,
+    width: 30,
+    color: 'grey',
+    margin: 2,
   },
 });
 export default SigninScreen;

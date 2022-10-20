@@ -7,6 +7,7 @@ import {
   Text,
   FlatList,
   Alert,
+  StatusBar,
 } from 'react-native';
 import drawerlogo from '../../../assests/burger_menu.png';
 import textpic from '../../../assests/passtext.png';
@@ -60,6 +61,7 @@ const PassManager = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <StatusBar color="#085AAD" />
       <View style={styles.container}>
         <View style={styles.navBar}>
           <View style={styles.imageContainer}>
@@ -130,6 +132,7 @@ const styles = StyleSheet.create({
 
   pageContainer: {
     flexDirection: 'column',
+    margin: 10,
   },
 
   headerContainer: {

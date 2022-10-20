@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 const ItemList = ({
   logo,
@@ -9,6 +10,18 @@ const ItemList = ({
   onLongPress,
   onPress,
 }) => {
+  const [copiedText, setCopiedText] = useState('');
+
+  const copyToClipboard = password => {
+    Clipboard.setString(password);
+    alert(password);
+  };
+
+  const fetchCopiedText = async () => {
+    const text = await Clipboard.getString();
+    setCopiedText(text);
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
@@ -18,7 +31,9 @@ const ItemList = ({
         <Image source={logo} style={styles.logo} />
         <View style={styles.textContainer}>
           <Text style={styles.maintext}>{mainText}</Text>
-          <Text style={styles.copyText}>{copyPassword}</Text>
+          <TouchableOpacity onPress={() => copyToClipboard(copyPassword)}>
+            <Text style={styles.copyText}>Copy Password</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.urlcontainer}>
@@ -32,17 +47,25 @@ export default ItemList;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 60,
-    borderRadius: 12.6,
-    margin: 10,
-    elevation: 25,
-    shadowColor: 'rgba(0,0,0,0.02)',
-    shadowOffset: {width: 1, height: 5},
-    shadowRadius: 3,
-    shadowColor: 'grey',
+    // marginTop: 60,
+    // borderRadius: 12.6,
+    // margin: 10,
+    // elevation: 25,
+    // shadowColor: 'rgba(0,0,0,0.02)',
+    // shadowOffset: {width: 1, height: 5},
+    // shadowRadius: 3,
+    // shadowColor: 'grey',
+    height: 104,
+    width: '100%',
+    borderRadius: 12,
+    backgroundColor: '#FFFFFF',
+    elevation: 10,
+    shadowColor: '#171717',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    marginTop: 40,
   },
-
-  logo: {},
 
   logoContainer: {
     flexDirection: 'row',
@@ -55,7 +78,6 @@ const styles = StyleSheet.create({
 
   maintext: {
     height: 24,
-    width: 83,
     color: '#0E85FF',
     fontSize: 18,
     fontWeight: '600',
@@ -67,6 +89,7 @@ const styles = StyleSheet.create({
     lineHeight: 15,
     color: '#0E85FF',
     lineHeight: 15,
+    alignSelf: 'center',
   },
 
   urlText: {

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, TextInput, Text} from 'react-native';
 import Button from '../../components/Button';
 import UserInput from '../../components/UserInput';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const SignUp = ({navigation}) => {
+  const [secureTextEntry, setSecureTextEntry] = useState(false);
+  const [icon, setIcon] = useState('eye-with-line');
   const loginValidationSchema = yup.object().shape({
     MobileNumber: yup
       .string()
@@ -72,16 +75,28 @@ const SignUp = ({navigation}) => {
               {errors.mPin && (
                 <Text style={styles.errorText}>{errors.mPin}</Text>
               )}
-              <TextInput
-                name="mPin"
-                placeholder="Re-Enter 4 digit MPin"
-                style={styles.textinput}
-                onChangeText={handleChange('confirmmPin')}
-                onBlur={handleBlur('confirmmPin')}
-                value={values.confirmmPin}
-                keyboardType="decimal-pad"
-                secureTextEntry
-              />
+              <View style={styles.textinput}>
+                <TextInput
+                  name="mPin"
+                  placeholder="Re-Enter 4 digit MPin"
+                  style={styles.mpinContainer}
+                  onChangeText={handleChange('confirmmPin')}
+                  onBlur={handleBlur('confirmmPin')}
+                  value={values.confirmmPin}
+                  keyboardType="decimal-pad"
+                  secureTextEntry={secureTextEntry}
+                />
+                <Icon
+                  style={styles.icon}
+                  name={icon}
+                  size={25}
+                  onPress={() => {
+                    setSecureTextEntry(!secureTextEntry);
+
+                    secureTextEntry ? setIcon('eye-with-line') : setIcon('eye');
+                  }}
+                />
+              </View>
               {errors.confirmmPin && (
                 <Text style={styles.errorText}>{errors.confirmmPin}</Text>
               )}
@@ -117,6 +132,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '100%',
     marginBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
   errorText: {
@@ -124,5 +142,18 @@ const styles = StyleSheet.create({
     color: '#ff0033',
     alignSelf: 'center',
     bottom: 10,
+  },
+  mpinContainer: {
+    borderRadius: 4,
+    backgroundColor: '#FFFFFF',
+    height: 50,
+    alignSelf: 'center',
+    width: '60%',
+  },
+  icon: {
+    height: 24,
+    width: 30,
+    color: 'grey',
+    margin: 2,
   },
 });

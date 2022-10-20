@@ -13,8 +13,13 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import uuid from 'react-native-uuid';
 import {addSite} from '../../redux/slice';
+import Icon1 from 'react-native-vector-icons/Entypo';
+import Toast from 'react-native-simple-toast';
 
 const AddSite = ({navigation}) => {
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [icon, setIcon] = useState('eye');
+
   const dispatch = useDispatch();
 
   const handlePassManagerScreen = () => {
@@ -43,6 +48,7 @@ const AddSite = ({navigation}) => {
       Notes: values.Notes,
     };
     dispatch(addSite(test));
+    Toast.show('Saved Successfully');
     navigation.navigate('PassManager');
   };
 
@@ -114,14 +120,28 @@ const AddSite = ({navigation}) => {
                   value={values.UserName}
                 />
                 <Text style={styles.text}>SitePassword</Text>
-                <TextInput
-                  name="SitePassword"
-                  style={styles.textInput}
-                  onChangeText={handleChange('SitePassword')}
-                  onBlur={handleBlur('SitePassword')}
-                  value={values.SitePassword}
-                  secureTextEntry
-                />
+                <View style={styles.textInput}>
+                  <TextInput
+                    name="SitePassword"
+                    style={styles.mpinContainer}
+                    onChangeText={handleChange('SitePassword')}
+                    onBlur={handleBlur('SitePassword')}
+                    value={values.SitePassword}
+                    secureTextEntry={secureTextEntry}
+                  />
+                  <Icon1
+                    style={styles.eyeicon}
+                    name={icon}
+                    size={25}
+                    onPress={() => {
+                      setSecureTextEntry(!secureTextEntry);
+
+                      secureTextEntry
+                        ? setIcon('eye-with-line')
+                        : setIcon('eye');
+                    }}
+                  />
+                </View>
                 {errors.SitePassword && (
                   <Text style={styles.errorText}>{errors.SitePassword}</Text>
                 )}
@@ -210,6 +230,8 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     padding: 10,
     marginBottom: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 
   inputContainer: {
@@ -229,6 +251,17 @@ const styles = StyleSheet.create({
     color: '#ff0033',
     alignSelf: 'center',
     bottom: 15,
+  },
+  mpinContainer: {
+    borderRadius: 4,
+    width: '70%',
+    borderColor: '#D7D7D7',
+  },
+  eyeicon: {
+    height: 24,
+    width: 30,
+    color: 'grey',
+    margin: 2,
   },
 });
 
