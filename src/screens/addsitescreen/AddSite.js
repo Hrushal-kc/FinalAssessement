@@ -108,13 +108,15 @@ const AddSite = ({navigation}) => {
                     value={values.SiteName}
                   />
                   <Text style={styles.text}>Sector/Folder</Text>
-                  <TextInput
-                    name="Sector"
-                    style={[styles.textInput, {height: 41}]}
-                    onChangeText={handleChange('Sector')}
-                    onBlur={handleBlur('Sector')}
-                    value={values.Sector}
-                  />
+                  <View style={[styles.textInput, {height: 41}]}>
+                    <TextInput
+                      name="Sector"
+                      style={[styles.textInput, {height: 41}]}
+                      onChangeText={handleChange('Sector')}
+                      onBlur={handleBlur('Sector')}
+                      value={values.Sector}
+                    />
+                  </View>
                   <Text style={styles.text}>UserName</Text>
                   <TextInput
                     name="UserName"

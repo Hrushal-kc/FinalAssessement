@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TextInput, Text} from 'react-native';
 import Button from '../../components/Button';
-import UserInput from '../../components/UserInput';
-import {Formik, Field} from 'formik';
+import {Formik} from 'formik';
 import * as yup from 'yup';
 import Icon from 'react-native-vector-icons/Entypo';
+import {useDispatch} from 'react-redux';
+import {signUpUser} from '../../redux/auth';
 
 const SignUp = ({navigation}) => {
+  const dispatch = useDispatch();
+
   const [secureTextEntry, setSecureTextEntry] = useState(false);
   const [icon, setIcon] = useState('eye-with-line');
   const loginValidationSchema = yup.object().shape({
@@ -25,7 +28,13 @@ const SignUp = ({navigation}) => {
   });
 
   const handlePassManagerScreen = values => {
-    navigation.navigate('PassManager');
+    let data = {
+      MobileNumber: values.MobileNumber,
+      mPin: values.mPin,
+      confirmmPin: values.confirmmPin,
+    };
+    dispatch(signUpUser(data));
+    // navigation.navigate('PassManager');
   };
 
   return (

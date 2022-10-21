@@ -6,15 +6,20 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/Entypo';
+import {useDispatch} from 'react-redux';
+import {signINUser} from '../../redux/auth';
 
 const SigninScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState('eye');
 
-  const handlePassManagerScreen = () => {
-    Toast.show('Congrtats!!! Success \n Signin to access the vault');
-    navigation.navigate('PassManager');
-  };
+  // const handlePassManagerScreen = values => {
+  //   console.log(values);
+  //   dispatch(signINUser(values));
+  //   // Toast.show('Congrtats!!! Success \n Signin to access the vault');
+  //   // navigation.navigate('PassManager');
+  // };
 
   const loginValidationSchema = yup.object().shape({
     MobileNumber: yup
@@ -33,7 +38,7 @@ const SigninScreen = ({navigation}) => {
         <Formik
           validationSchema={loginValidationSchema}
           initialValues={{MobileNumber: '', mPin: ''}}
-          onSubmit={handlePassManagerScreen}>
+          onSubmit={values => dispatch(signINUser(values))}>
           {({
             handleChange,
             handleBlur,
