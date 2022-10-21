@@ -11,6 +11,7 @@
     "generate": "npx react-native generate-bootsplash ./assests/logo.png --background-color=0E85FF   --logo-width=100 --assets-path=./assests --flavor=main"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-native-clipboard/clipboard": "^1.11.1",
     "@react-navigation/material-top-tabs": "^6.3.0",
     "@react-navigation/native": "^6.0.13",
@@ -30,6 +31,7 @@
     "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.4",
     "redux": "^4.2.0",
+    "redux-persist": "^6.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

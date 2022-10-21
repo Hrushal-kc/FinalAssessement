@@ -10,8 +10,12 @@ import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import SelectSite from './src/screens/selectsitescreen/SelectSite';
 import EditSite from './src/screens/editsitescreen/EditSite';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistStore} from 'redux-persist';
 
 const Stack = createNativeStackNavigator();
+
+const persistor = persistStore(store);
 
 const App = () => {
   const MyTheme = {
@@ -24,35 +28,39 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer theme={MyTheme} onReady={() => RNBootSplash.hide()}>
-        <Stack.Navigator initialRouteName="AuthTabNavigation">
-          <Stack.Screen
-            name="AuthTabNavigation"
-            component={AuthTabNavigation}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="PassManager"
-            component={PassManager}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="AddSite"
-            component={AddSite}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="SelectSite"
-            component={SelectSite}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="EditSite"
-            component={EditSite}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <PersistGate persistor={persistor}>
+        <NavigationContainer
+          theme={MyTheme}
+          onReady={() => RNBootSplash.hide()}>
+          <Stack.Navigator initialRouteName="AuthTabNavigation">
+            <Stack.Screen
+              name="AuthTabNavigation"
+              component={AuthTabNavigation}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="PassManager"
+              component={PassManager}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="AddSite"
+              component={AddSite}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="SelectSite"
+              component={SelectSite}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EditSite"
+              component={EditSite}
+              options={{headerShown: false}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 };
