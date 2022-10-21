@@ -49,10 +49,11 @@ const DATA = [
 
 export const slice = createSlice({
   name: 'slice',
-  initialState: {value: DATA},
+  initialState: {value: DATA, siteContainer: DATA},
   reducers: {
     addSite: (state, action) => {
       state.value.push(action.payload);
+      state.siteContainer.push(action.payload);
     },
 
     updateSite: (state, action) => {
@@ -62,21 +63,22 @@ export const slice = createSlice({
         }
         return passwordDetails;
       });
+      state.siteContainer = state.value;
     },
 
     deleteSite: (state, action) => {
       state.value = state.value.filter(task => task.id !== action.payload.id);
+      state.siteContainer = state.value;
     },
 
-    updateStatus: (state, action) => {
-      state.value.map(task => {
-        if (task.id === action.payload.id) {
-          task.status = action.payload.status;
-        }
-      });
+    filterSite: (state, action) => {
+      state.value = state.siteContainer.filter(values =>
+        values.SiteName.toLowerCase().includes(action.payload.toLowerCase()),
+      );
+      console.log(action.payload);
     },
   },
 });
 
 export default slice.reducer;
-export const {addSite, updateSite, deleteSite, updateStatus} = slice.actions;
+export const {addSite, updateSite, deleteSite, filterSite} = slice.actions;

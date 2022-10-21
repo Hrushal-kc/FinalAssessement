@@ -1,11 +1,19 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {TextInput, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useDispatch} from 'react-redux';
+import {filterSite} from '../redux/slice';
 
-const SearchBar1 = () => {
+const SearchBar1 = ({onChangeText, value}) => {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
-      <TextInput placeholder="Type kewords to search" />
+      <TextInput
+        placeholder="Type kewords to search"
+        onChangeText={value => dispatch(filterSite(value))}
+        value={value}
+      />
       <Icon name="arrow-forward" style={styles.icon} size={30} />
     </View>
   );
@@ -18,7 +26,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
   },
   icon: {
     color: '#0E85FF',

@@ -21,6 +21,7 @@ import AddButton from '../../components/AddButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteSite} from '../../redux/slice';
 import SearchBar1 from '../../components/SearchBar';
+import {validateYupSchema} from 'formik';
 
 const PassManager = ({navigation}) => {
   const [showSearchBar, setShowSeacrhBar] = useState(false);
@@ -84,19 +85,22 @@ const PassManager = ({navigation}) => {
           </View>
         </View>
         <View style={styles.pageContainer}>
-          {showSearchBar && <SearchBar1 />}
+          {showSearchBar ? (
+            <SearchBar1 />
+          ) : (
+            <View style={styles.headerContainer}>
+              <View>
+                <Text style={styles.siteText}>Sites</Text>
+                <View style={styles.bottomLine} />
+              </View>
+              <Text style={styles.socialText}>Social Media</Text>
+              <View style={styles.badge}>
+                <Text style={styles.badgeText}>{taskList.length}</Text>
+              </View>
+              <Image source={pathLogo} />
+            </View>
+          )}
 
-          <View style={styles.headerContainer}>
-            <View>
-              <Text style={styles.siteText}>Sites</Text>
-              <View style={styles.bottomLine} />
-            </View>
-            <Text style={styles.socialText}>Social Media</Text>
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>07</Text>
-            </View>
-            <Image source={pathLogo} />
-          </View>
           <View style={styles.flatList}>
             <FlatList
               data={taskList}
@@ -199,10 +203,10 @@ const styles = StyleSheet.create({
   },
 
   badgeText: {
-    width: 19,
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 27,
+    alignSelf: 'center',
   },
 
   flatList: {},
