@@ -32,13 +32,29 @@ const SigninScreen = ({navigation}) => {
       .required('mPin is required'),
   });
 
+  const handlePassManagerScreen = values => {
+    let data = {
+      MobileNumber: values.MobileNumber,
+      mPin: values.mPin,
+    };
+    dispatch(signINUser(data));
+    // console.log(data);
+    // navigation.navigate('PassManager');
+  };
+
   return (
     <View style={styles.safeArea}>
       <View style={styles.container}>
         <Formik
           validationSchema={loginValidationSchema}
-          initialValues={{MobileNumber: '', mPin: ''}}
-          onSubmit={values => dispatch(signINUser(values))}>
+          initialValues={{
+            MobileNumber: '',
+            mPin: '',
+            confirmmPin: '',
+          }}
+          onSubmit={values => {
+            dispatch(() => handlePassManagerScreen(values));
+          }}>
           {({
             handleChange,
             handleBlur,
