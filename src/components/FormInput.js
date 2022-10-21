@@ -17,7 +17,7 @@ const FormInput = ({text, boxheight, value, editable}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 100,
+    marginBottom: 25,
   },
 
   text: {

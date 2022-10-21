@@ -6,6 +6,7 @@ import {
   Text,
   Pressable,
   TextInput,
+  ScrollView,
 } from 'react-native';
 
 import Icon1 from 'react-native-vector-icons/Entypo';
@@ -50,93 +51,95 @@ const EditSite = ({route, navigation}) => {
           onPress={handleSelectDetailsScreen}></Icon.Button>
         <Text style={styles.headertext}>Edit</Text>
       </View>
-      <View>
-        <Formik
-          validationSchema={loginValidationSchema}
-          initialValues={data}
-          onSubmit={handleValueSubmit}>
-          {({handleChange, handleBlur, handleSubmit, values, errors}) => (
-            <>
-              <View style={styles.inputContainer}>
-                <Text style={styles.text}>URL</Text>
-                <TextInput
-                  name="URL"
-                  style={[styles.textInput, {height: 41}]}
-                  onChangeText={handleChange('URL')}
-                  onBlur={handleBlur('URL')}
-                  value={values.URL}
-                />
-                {errors.URL && (
-                  <Text style={styles.errorText}>{errors.URL}</Text>
-                )}
-                <Text style={styles.text}>SiteName</Text>
-                <TextInput
-                  name="SiteName"
-                  style={[styles.textInput, {height: 41}]}
-                  onChangeText={handleChange('SiteName')}
-                  onBlur={handleBlur('SiteName')}
-                  value={values.SiteName}
-                />
-                <Text style={styles.text}>Sector/Folder</Text>
-                <TextInput
-                  name="Sector"
-                  style={[styles.textInput, {height: 41}]}
-                  onChangeText={handleChange('Sector')}
-                  onBlur={handleBlur('Sector')}
-                  value={values.Sector}
-                />
-                <Text style={styles.text}>UserName</Text>
-                <TextInput
-                  name="UserName"
-                  style={[styles.textInput, {height: 41}]}
-                  onChangeText={handleChange('UserName')}
-                  onBlur={handleBlur('UserName')}
-                  value={values.UserName}
-                />
-                <Text style={styles.text}>SitePassword</Text>
-                <View style={[styles.textInput, {height: 41}]}>
+      <ScrollView>
+        <View>
+          <Formik
+            validationSchema={loginValidationSchema}
+            initialValues={data}
+            onSubmit={handleValueSubmit}>
+            {({handleChange, handleBlur, handleSubmit, values, errors}) => (
+              <>
+                <View style={styles.inputContainer}>
+                  <Text style={styles.text}>URL</Text>
                   <TextInput
-                    name="SitePassword"
-                    style={styles.mpinContainer}
-                    onChangeText={handleChange('SitePassword')}
-                    onBlur={handleBlur('SitePassword')}
-                    value={values.SitePassword}
-                    secureTextEntry={secureTextEntry}
+                    name="URL"
+                    style={[styles.textInput, {height: 41}]}
+                    onChangeText={handleChange('URL')}
+                    onBlur={handleBlur('URL')}
+                    value={values.URL}
                   />
-                  <Icon1
-                    style={styles.eyeicon}
-                    name={icon}
-                    size={25}
-                    onPress={() => {
-                      setSecureTextEntry(!secureTextEntry);
+                  {errors.URL && (
+                    <Text style={styles.errorText}>{errors.URL}</Text>
+                  )}
+                  <Text style={styles.text}>SiteName</Text>
+                  <TextInput
+                    name="SiteName"
+                    style={[styles.textInput, {height: 41}]}
+                    onChangeText={handleChange('SiteName')}
+                    onBlur={handleBlur('SiteName')}
+                    value={values.SiteName}
+                  />
+                  <Text style={styles.text}>Sector/Folder</Text>
+                  <TextInput
+                    name="Sector"
+                    style={[styles.textInput, {height: 41}]}
+                    onChangeText={handleChange('Sector')}
+                    onBlur={handleBlur('Sector')}
+                    value={values.Sector}
+                  />
+                  <Text style={styles.text}>UserName</Text>
+                  <TextInput
+                    name="UserName"
+                    style={[styles.textInput, {height: 41}]}
+                    onChangeText={handleChange('UserName')}
+                    onBlur={handleBlur('UserName')}
+                    value={values.UserName}
+                  />
+                  <Text style={styles.text}>SitePassword</Text>
+                  <View style={[styles.textInput, {height: 41}]}>
+                    <TextInput
+                      name="SitePassword"
+                      style={styles.mpinContainer}
+                      onChangeText={handleChange('SitePassword')}
+                      onBlur={handleBlur('SitePassword')}
+                      value={values.SitePassword}
+                      secureTextEntry={secureTextEntry}
+                    />
+                    <Icon1
+                      style={styles.eyeicon}
+                      name={icon}
+                      size={25}
+                      onPress={() => {
+                        setSecureTextEntry(!secureTextEntry);
 
-                      secureTextEntry
-                        ? setIcon('eye-with-line')
-                        : setIcon('eye');
-                    }}
+                        secureTextEntry
+                          ? setIcon('eye-with-line')
+                          : setIcon('eye');
+                      }}
+                    />
+                  </View>
+                  {errors.SitePassword && (
+                    <Text style={styles.errorText}>{errors.SitePassword}</Text>
+                  )}
+                  <Text style={styles.text}>Notes</Text>
+                  <TextInput
+                    name="Notes"
+                    style={[styles.textInput, {height: 61}]}
+                    onChangeText={handleChange('Notes')}
+                    onBlur={handleBlur('Notes')}
+                    value={values.Notes}
                   />
                 </View>
-                {errors.SitePassword && (
-                  <Text style={styles.errorText}>{errors.SitePassword}</Text>
-                )}
-                <Text style={styles.text}>Notes</Text>
-                <TextInput
-                  name="Notes"
-                  style={[styles.textInput, {height: 61}]}
-                  onChangeText={handleChange('Notes')}
-                  onBlur={handleBlur('Notes')}
-                  value={values.Notes}
-                />
-              </View>
-              <View style={styles.buttonContainer}>
-                <Pressable style={styles.button} onPress={handleSubmit}>
-                  <Text style={styles.buttonText}>UPDATE</Text>
-                </Pressable>
-              </View>
-            </>
-          )}
-        </Formik>
-      </View>
+                <View style={styles.buttonContainer}>
+                  <Pressable style={styles.button} onPress={handleSubmit}>
+                    <Text style={styles.buttonText}>UPDATE</Text>
+                  </Pressable>
+                </View>
+              </>
+            )}
+          </Formik>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

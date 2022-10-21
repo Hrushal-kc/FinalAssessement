@@ -45,14 +45,6 @@ export default ItemList;
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: 60,
-    // borderRadius: 12.6,
-    // margin: 10,
-    // elevation: 25,
-    // shadowColor: 'rgba(0,0,0,0.02)',
-    // shadowOffset: {width: 1, height: 5},
-    // shadowRadius: 3,
-    // shadowColor: 'grey',
     height: 104,
     width: '100%',
     borderRadius: 12,

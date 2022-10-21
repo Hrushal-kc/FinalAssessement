@@ -97,11 +97,12 @@ const PassManager = ({navigation}) => {
             </View>
             <Image source={pathLogo} />
           </View>
-          <FlatList
-            style={styles.flatList}
-            data={taskList}
-            renderItem={renderItems}
-            keyExtractor={item => item.id}></FlatList>
+          <View style={styles.flatList}>
+            <FlatList
+              data={taskList}
+              renderItem={renderItems}
+              keyExtractor={item => item.id}></FlatList>
+          </View>
         </View>
       </View>
       <AddButton onPress={handleSiteNavigation} />
@@ -112,11 +113,11 @@ const PassManager = ({navigation}) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: '#FAFAFA',
   },
 
   container: {
     flexDirection: 'column',
-    backgroundColor: '#FAFAFA',
   },
 
   navBar: {
@@ -128,6 +129,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     backgroundColor: '#0E85FF',
     padding: 15,
+    width: '100%',
   },
 
   imageContainer: {
@@ -202,6 +204,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     lineHeight: 27,
   },
+
+  flatList: {},
 });
 
 export default PassManager;
