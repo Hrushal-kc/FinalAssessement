@@ -77,8 +77,19 @@ export const slice = createSlice({
       );
       console.log(action.payload);
     },
+
+    filterDropDown: (state, action) => {
+      if (action.payload == 'All') {
+        state.value = state.siteContainer;
+      } else {
+        state.value = state.siteContainer.filter(site =>
+          site.Sector.toLowerCase().includes(action.payload.toLowerCase()),
+        );
+      }
+    },
   },
 });
 
 export default slice.reducer;
-export const {addSite, updateSite, deleteSite, filterSite} = slice.actions;
+export const {addSite, updateSite, deleteSite, filterSite, filterDropDown} =
+  slice.actions;

@@ -37,9 +37,9 @@ const SigninScreen = ({navigation}) => {
       MobileNumber: values.MobileNumber,
       mPin: values.mPin,
     };
-    dispatch(signINUser(data));
+    // dispatch(signINUser(data));
     // console.log(data);
-    // navigation.navigate('PassManager');
+    navigation.navigate('PassManager');
   };
 
   return (

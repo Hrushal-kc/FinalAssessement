@@ -9,6 +9,7 @@ import {
   Alert,
   StatusBar,
   Pressable,
+  TouchableOpacity,
 } from 'react-native';
 import drawerlogo from '../../../assests/burger_menu.png';
 import textpic from '../../../assests/passtext.png';
@@ -19,13 +20,42 @@ import pathLogo from '../../../assests/PathCopy.png';
 import ItemList from '../../components/ItemList';
 import AddButton from '../../components/AddButton';
 import {useDispatch, useSelector} from 'react-redux';
-import {deleteSite} from '../../redux/slice';
+import {deleteSite, filterDropDown} from '../../redux/slice';
 import SearchBar1 from '../../components/SearchBar';
 
 const PassManager = ({navigation}) => {
   const [showSearchBar, setShowSeacrhBar] = useState(false);
   const taskList = useSelector(state => state.slice.value);
   const dispatch = useDispatch();
+  const [visible, setVisible] = useState(false);
+  const [item, setItem] = useState('All');
+  const sitesFolder = ['All', 'Social Media', 'Shopping Sites'];
+
+  const setDropdown = () => {
+    setVisible(!visible);
+  };
+  const handleFolders = folder => {
+    setItem(folder);
+    dispatch(filterDropDown(folder));
+    setVisible(false);
+  };
+  const renderDropdown = () => {
+    if (visible) {
+      return (
+        <View style={styles.dropdownStyles}>
+          {sitesFolder.map(folder => (
+            <TouchableOpacity
+              onPress={() => {
+                handleFolders(folder);
+              }}
+              key={folder}>
+              <Text style={styles.textStyle}>{folder}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      );
+    }
+  };
 
   const handleShowSearchBar = () => {
     setShowSeacrhBar(!showSearchBar);
@@ -92,14 +122,18 @@ const PassManager = ({navigation}) => {
                 <Text style={styles.siteText}>Sites</Text>
                 <View style={styles.bottomLine} />
               </View>
-              <Text style={styles.socialText}>Social Media</Text>
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>{taskList.length}</Text>
+              <View style={styles.dropdownContainer}>
+                <Text style={styles.socialText}>{item}</Text>
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>{taskList.length}</Text>
+                </View>
+                <TouchableOpacity onPress={setDropdown}>
+                  <Image source={pathLogo} />
+                </TouchableOpacity>
               </View>
-              <Image source={pathLogo} />
             </View>
           )}
-
+          {renderDropdown()}
           <View style={styles.flatList}>
             <FlatList
               data={taskList}
@@ -158,7 +192,7 @@ const styles = StyleSheet.create({
 
   headerContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     marginTop: 10,
   },
@@ -208,7 +242,26 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 
-  flatList: {},
+  dropdownStyles: {
+    width: '50%',
+    alignSelf: 'flex-end',
+    backgroundColor: '#F5F7FB',
+    borderWidth: 0.3,
+    borderColor: '#D7D7D7',
+    borderRadius: 5,
+  },
+  textStyle: {
+    color: 'black',
+    alignSelf: 'center',
+    justifyContent: 'space-around',
+  },
+
+  dropdownContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    padding: 10,
+  },
 });
 
 export default PassManager;
