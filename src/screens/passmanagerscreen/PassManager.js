@@ -14,7 +14,6 @@ import {
 import drawerlogo from '../../../assests/burger_menu.png';
 import textpic from '../../../assests/passtext.png';
 import searchlogo from '../../../assests/search.png';
-import synclogo from '../../../assests/sync_icn.png';
 import profilelogo from '../../../assests/profile.png';
 import pathLogo from '../../../assests/PathCopy.png';
 import ItemList from '../../components/ItemList';
@@ -22,6 +21,7 @@ import AddButton from '../../components/AddButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteSite, filterDropDown} from '../../redux/slice';
 import SearchBar1 from '../../components/SearchBar';
+import {DataSyncField} from '../../components/dataSyncField';
 
 const PassManager = ({navigation}) => {
   const [showSearchBar, setShowSeacrhBar] = useState(false);
@@ -109,7 +109,7 @@ const PassManager = ({navigation}) => {
             <Pressable onPress={handleShowSearchBar}>
               <Image source={searchlogo} style={styles.logoimage} />
             </Pressable>
-            <Image source={synclogo} style={styles.logoimage} />
+            <DataSyncField />
             <Image source={profilelogo} style={styles.logoimage} />
           </View>
         </View>
@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
+    alignItems: 'center',
   },
 
   pageContainer: {
