@@ -21,7 +21,6 @@ import AddButton from '../../components/AddButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteSite} from '../../redux/slice';
 import SearchBar1 from '../../components/SearchBar';
-import {validateYupSchema} from 'formik';
 
 const PassManager = ({navigation}) => {
   const [showSearchBar, setShowSeacrhBar] = useState(false);

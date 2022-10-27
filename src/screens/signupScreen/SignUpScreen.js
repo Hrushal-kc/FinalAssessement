@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import Icon from 'react-native-vector-icons/Entypo';
 import {useDispatch} from 'react-redux';
 import {signUpUser} from '../../redux/auth';
+import Toast from 'react-native-simple-toast';
 
 const SignUp = ({navigation}) => {
   const dispatch = useDispatch();
@@ -34,7 +35,8 @@ const SignUp = ({navigation}) => {
       confirmmPin: values.confirmmPin,
     };
     dispatch(signUpUser(data));
-    // navigation.navigate('PassManager');
+    Toast.show('Congrtats!!! Success \n Signin to access the vault');
+    navigation.navigate('PassManager');
   };
 
   return (

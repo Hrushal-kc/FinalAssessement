@@ -24,7 +24,7 @@ const ItemList = ({
       onPress={onPress}>
       <View style={styles.logoContainer}>
         <Image source={logo} style={styles.logo} />
-        <View style={styles.textContainer}>
+        <View>
           <Text style={styles.maintext}>{mainText}</Text>
           <TouchableOpacity onPress={() => copyToClipboard(copyPassword)}>
             <View style={styles.copyContainer}>
@@ -63,8 +63,6 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: 'space-between',
   },
-
-  textContainer: {},
 
   maintext: {
     height: 24,

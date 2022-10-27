@@ -15,15 +15,33 @@ import * as yup from 'yup';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch} from 'react-redux';
 import {updateSite} from '../../redux/slice';
+import DropdownField from '../../components/DropdownField';
 
 const EditSite = ({route, navigation}) => {
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [icon, setIcon] = useState('eye');
-  const dispatch = useDispatch();
+  const dropdownData = [
+    {key: 'Social Media', value: 'Social Media'},
+    {key: 'Shopping Sites', value: 'Shopping Sites'},
+  ];
   const data = route.params.dataValue;
 
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [icon, setIcon] = useState('eye');
+  const [select, setSelect] = useState([]);
+
+  const dispatch = useDispatch();
+
   const handleValueSubmit = values => {
-    dispatch(updateSite(values));
+    let test = {
+      id: values.id,
+      URL: values.URL,
+      SiteName: values.SiteName,
+      Sector: select,
+      UserName: values.UserName,
+      SitePassword: values.SitePassword,
+      Notes: values.Notes,
+      image: values.image,
+    };
+    dispatch(updateSite(test));
     navigation.navigate('PassManager');
   };
 
@@ -79,13 +97,14 @@ const EditSite = ({route, navigation}) => {
                     onBlur={handleBlur('SiteName')}
                     value={values.SiteName}
                   />
-                  <Text style={styles.text}>Sector/Folder</Text>
-                  <TextInput
+                  <DropdownField
+                    text="Sector"
                     name="Sector"
-                    style={[styles.textInput, {height: 41}]}
-                    onChangeText={handleChange('Sector')}
-                    onBlur={handleBlur('Sector')}
-                    value={values.Sector}
+                    onChangeText={handleChange('select')}
+                    onBlur={handleBlur('select')}
+                    data={dropdownData}
+                    value={values.select}
+                    setSelected={setSelect}
                   />
                   <Text style={styles.text}>UserName</Text>
                   <TextInput
@@ -194,6 +213,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginLeft: 20,
     marginRight: 20,
+    marginTop: 10,
   },
   text: {
     fontSize: 18,

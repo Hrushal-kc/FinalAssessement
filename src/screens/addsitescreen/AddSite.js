@@ -17,10 +17,17 @@ import {addSite} from '../../redux/slice';
 import Icon1 from 'react-native-vector-icons/Entypo';
 import Toast from 'react-native-simple-toast';
 import instagram from '../../../assests/instagram.png';
+import DropdownField from '../../components/DropdownField';
 
 const AddSite = ({navigation}) => {
+  const dropdownData = [
+    {key: 'Social Media', value: 'Social Media'},
+    {key: 'Shopping Sites', value: 'Shopping Sites'},
+  ];
+
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [icon, setIcon] = useState('eye');
+  const [selected, setSelected] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -44,7 +51,7 @@ const AddSite = ({navigation}) => {
       id: uuid.v4(),
       URL: values.URL,
       SiteName: values.SiteName,
-      Sector: values.Sector,
+      Sector: selected,
       UserName: values.UserName,
       SitePassword: values.SitePassword,
       Notes: values.Notes,
@@ -72,7 +79,6 @@ const AddSite = ({navigation}) => {
             initialValues={{
               URL: '',
               SiteName: '',
-              Sector: '',
               UserName: '',
               SitePassword: '',
               Notes: '',
@@ -107,16 +113,15 @@ const AddSite = ({navigation}) => {
                     onBlur={handleBlur('SiteName')}
                     value={values.SiteName}
                   />
-                  <Text style={styles.text}>Sector/Folder</Text>
-                  <View style={[styles.textInput, {height: 41}]}>
-                    <TextInput
-                      name="Sector"
-                      style={[styles.textInput, {height: 41}]}
-                      onChangeText={handleChange('Sector')}
-                      onBlur={handleBlur('Sector')}
-                      value={values.Sector}
-                    />
-                  </View>
+                  <DropdownField
+                    text="Sector"
+                    name="Sector"
+                    onChangeText={handleChange('Sector')}
+                    onBlur={handleBlur('Sector')}
+                    data={dropdownData}
+                    setSelected={setSelected}
+                    value={values.selected}
+                  />
                   <Text style={styles.text}>UserName</Text>
                   <TextInput
                     name="UserName"
